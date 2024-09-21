@@ -9,7 +9,7 @@ Auto Torrent is a torrent scraper and downloader. The Auto Torrent Web version i
 - Python
 - AutoTorrent Module
 - Qbittorrent Web UI
-- Plesk
+- Plex
 
 ## Installation
 
