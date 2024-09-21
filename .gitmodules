@@ -1,0 +1,3 @@
+[submodule "AutoTorrent"]
+	path = AutoTorrent
+	url = https://github.com/melihbasayigit/AutoTorrent.git

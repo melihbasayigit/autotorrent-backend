@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 
-import random
+import sys
+sys.path.append("AutoTorrent")
+
+from AutoTorrent.auto_torrent import AutoTorrent
 
 app = Flask(__name__)
 
@@ -17,17 +20,19 @@ def search():
 
     print(f"Arama: {movie_name}, Kalite: {quality}, Site: {website}, Kategori: {category}")
     
-    # 1-20 arasında mock veri üretme
-    mock_data = []
-    num_results = random.randint(1, 20)  # 1 ile 20 arasında sonuç üretecek
-    for i in range(1, num_results + 1):
-        mock_data.append({
-            'torrent_name': f"Mock Movie {i}",
-            'magnet_url': f"magnet:?xt=urn:btih:mockhash{i:05}"
-        })
+    auto_torrent = AutoTorrent()
+    result = auto_torrent.defaultStart(input=movie_name, qualities=["1080P","720P"])
 
+    results = []
+
+    for torrent in result:
+        results.append({
+            'torrent_name': f" {torrent.title} {torrent.year} {torrent.quality_size}",
+            'magnet_url': f"{torrent.magnet_url}"
+        })
+        
     # Sonuçları JSON olarak geri döndürüyoruz
-    return jsonify({'results': mock_data})
+    return jsonify({'results': results})
 
 @app.route('/downloaded/<torrent_name>/<magnet_url>')
 def downloaded(torrent_name, magnet_url):
