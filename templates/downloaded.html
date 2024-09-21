@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloaded</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+  <div class="container">
+    <h1 class="mt-5">Downloaded Torrent</h1>
+    <p>Torrent Name: {{ torrent_name }}</p>
+    <a href="/">Return to Search</a>
+    <br>
+    <a href="{{ magnet_url }}" class="" role="button">Magnet Link</a>
+  </div>
+</body>
+</html>

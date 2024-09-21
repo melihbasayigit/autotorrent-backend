@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Torrent</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="d-flex flex-column h-100">
+  <div class="container px-4 p-3">
+    <div class="row">
+      <div class="col-8">
+        <div class="logo text-center">
+          <img src="{{ url_for('static', filename='logo.png') }}" class="img-thumbnail" alt="...">
+        </div>
+
+        <!-- Arama Formu -->
+        <form action="/search" method="POST">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Movie Name</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="movie_name">
+            <button type="submit" class="btn btn-secondary">Search</button>
+          </div>
+
+          <div class="container">
+            <ul class="list-group">
+              <a href="">
+                <li class="list-group-item"><i class="bi bi-chevron-right"></i> Torrent One</li>
+              </a>
+              <a href="">
+                <li class="list-group-item"><i class="bi bi-chevron-right"></i> A second item</li>
+              </a>
+              <a href="">
+                <li class="list-group-item"><i class="bi bi-chevron-right"></i> A third item</li>
+              </a>
+              <a href="">
+                <li class="list-group-item"><i class="bi bi-chevron-right"></i> A fourth item</li>
+              </a>
+              <a href="">
+                <li class="list-group-item"><i class="bi bi-chevron-right"></i> And a fifth one</li>
+              </a>
+            </ul>
+          </div>
+      </div>
+
+      <!-- Filtre Bölümü -->
+      <div class="col-4">
+        <div class="container">
+          <div class="h5 text-center">Quality</div>
+          <hr>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="quality" value="1080P" id="quality1080p" checked>
+                <label class="form-check-label" for="quality1080p">
+                  1080P
+                </label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="quality" value="720P" id="quality720p" checked>
+                <label class="form-check-label" for="quality720p">
+                  720P
+                </label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="quality" value="4K" id="quality4k" checked>
+                <label class="form-check-label" for="quality4k">
+                  4K
+                </label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="quality" value="3D" id="quality3d">
+                <label class="form-check-label" for="quality3d">
+                  3D
+                </label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="quality" value="480P" id="quality480p">
+                <label class="form-check-label" for="quality480p">
+                  480P
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="container">
+          <div class="h5 text-center">Website</div>
+          <hr>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="website" value="YTS.mx" id="websiteYTS" checked>
+                <label class="form-check-label" for="websiteYTS">
+                  YTS.mx
+                </label>
+              </div>
+            </li>
+
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="website" value="1337x.to" id="website1337x">
+                <label class="form-check-label" for="website1337x">
+                  1337x.to
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="container">
+          <div class="h5 text-center">Category</div>
+          <hr>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="category" value="Movie" id="categoryMovie" checked>
+                <label class="form-check-label" for="categoryMovie">
+                  Movie
+                </label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="category" value="TV Series" id="categoryTVSeries">
+                <label class="form-check-label" for="categoryTVSeries">
+                  TV Series
+                </label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="category" value="Anime" id="categoryAnime">
+                <label class="form-check-label" for="categoryAnime">
+                  Anime
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Sayfanın yenilenmesini engeller
+  
+      const formData = new FormData(this);
+  
+      // Backend'e POST isteği gönder
+      fetch('/search', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        const listContainer = document.querySelector('.list-group');
+  
+        // Mevcut listeyi temizle
+        listContainer.innerHTML = '';
+  
+        // Gelen veriye göre yeni liste öğeleri oluştur ve ekle
+        data.results.forEach(result => {
+          const listItem = document.createElement('li');
+          listItem.classList.add('list-group-item');
+          listItem.innerHTML = `<i class="bi bi-chevron-right"></i> ${result.torrent_name}`;
+          
+          const link = document.createElement('a');
+          link.href = `/downloaded/${encodeURIComponent(result.torrent_name)}/${encodeURIComponent(result.magnet_url)}`;
+          link.appendChild(listItem);
+          
+          listContainer.appendChild(link);
+      });
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  </script>
+  
+  
+</body>
+
+</html>
