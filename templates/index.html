@@ -178,9 +178,8 @@
           const listItem = document.createElement('li');
           listItem.classList.add('list-group-item');
           listItem.innerHTML = `<i class="bi bi-chevron-right"></i> ${result.torrent_name}`;
-          
           const link = document.createElement('a');
-          link.href = `/downloaded/${encodeURIComponent(result.torrent_name)}/${encodeURIComponent(result.magnet_url)}`;
+          link.href = `/downloaded/${encodeURIComponent(result.category)}/${encodeURIComponent(result.torrent_name)}/${encodeURIComponent(result.magnet_url)}`;
           link.appendChild(listItem);
           
           listContainer.appendChild(link);
