@@ -47,6 +47,19 @@ You need to check your .env file is correct. There is an example [.env](#usage) 
 
 I will fix savepath soon. You find all paths in category_type.py
 
+## Upcoming Features
+
+- Admin Panel
+- Add Movie Information and Poster in Frontend
+
 ## Related
 
 [AutoTorrent](https://github.com/melihbasayigit/AutoTorrent) Module
+
+## Web Images
+
+![ss_1](/doc/sc1.PNG)
+
+![ss_2](/doc/sc2.PNG)
+
+![ss_3](/doc/sc3.PNG)
